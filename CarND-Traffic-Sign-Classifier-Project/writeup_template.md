@@ -169,10 +169,10 @@ If an iterative approach was chosen:
 	* Dropout layer prevents overfitting by reducing the complexity of the network.
 	* The neurons are shooted down as per the selection of the probability value in the dropout layer.
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+* If a well known architecture was chosen: What architecture was chosen?
+	* I played around with the various network tried on mnsit dataset. The state of the art technique is to use 2 to 3 conv layers with max pooling, dropout and relu. It has been tested by many people and the accuracy in all forms in quite excellent. So, I tried the same here.
+* Why did you believe it would be relevant to the traffic sign application? How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+	* The traffic signs images are good for a basic network like mine. The color information isnt trivial thus grayscale images work well. The orientation might be an issue at times, but since I have trained the network using the augmented data, this might not be an issue. The sign images arent so big and the features are not too big or too small, i.e. the features on human faces like eye, lips corners etc requires small conv filters to read this detailed information from the face, but here 3x3 filter worked quite well.
  
 
 ### Test a Model on New Images
@@ -211,9 +211,13 @@ The model was able to correctly guess 5 of the 5 traffic signs, which gives an a
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+* The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-The confidence level of the predictions is quite good. The prediction probability for the correct class label are higher than 0.98 in all the cases. Instead of writing the values for the test images( image from web) I am attaching the images generated in the python notebook.
+1. The confidence level of the predictions is quite good. The prediction probability for the correct class label are higher than 0.98 in all the cases. Instead of writing the values for the test images( image from web) I am attaching the images generated in the python notebook.
+
+1. I wanted to try batch normalization and also have added some code which I found at https://gist.github.com/tomokishii/0ce3bdac1588b5cca9fa5fbdf6e1c412, however, I didnt have time to incorporate it.
+ 
+1. I also think using dilated convolution layers might be useful here as the it will increase the overall filter size and thus it might help in improving overall networks performance.
 
 ![alt text][10] ![alt text][11] ![alt text][12] 
 ![alt text][13] ![alt text][14]
