@@ -149,31 +149,50 @@ My final model results were:
 ![alt text][15]
 If an iterative approach was chosen:
 
-1. What was the first architecture that was tried and why was it chosen?
-	1. I choose it after applying things in brute force way. I added and deleted layers multiple times and observed the change in accuracy. I used read about existing high performing network structure on similar kinda image dataset and tried to use similar structure.
-	2. I initially tried with 2 convolution layer and with dropout of 0.75. I realised that I am shooting lot of useful neurons and then changed the dropout value to 0.25. I also added addition convolution layer.
-	3. I was using a filter size of 5x5 in all the convolution layers, however, I realised may be the size if big for the image dataset we have. Thus, switched to 3x3 filter size.
-1. What were some problems with the initial architecture?
+#### 1. What was the first architecture that was tried and why was it chosen?
+	1. I choose it after applying things in brute force way. I added and deleted layers multiple times 
+	and observed the change in accuracy. I used read about existing high performing network structure 
+	on similar kinda image dataset and tried to use similar structure.
+	2. I initially tried with 2 convolution layer and with dropout of 0.75. I realised that I am shooting 
+	lot of useful neurons and then changed the dropout value to 0.25. 
+	I also added addition convolution layer.
+	3. I was using a filter size of 5x5 in all the convolution layers, however, 
+	I realised may be the size if big for the image dataset we have. Thus, switched to 3x3 filter size.
+#### 2. What were some problems with the initial architecture?
 	1. The filter size was quite big thus small features like corners in the sign image were getting missed.
-	2. The layers were not enough to have enough parameters to accomodate all the features. I also increased the number of filters in a layer which gave in better accuracy results.
-1. How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+	2. The layers were not enough to have enough parameters to accomodate all the features. 
+	I also increased the number of filters in a layer which gave in better accuracy results.
+#### 3. How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
 	1. As described above, I added/removed layers multiple times.
 	2. I adjusted the learning rate and exponential decay parameters for the Optimizer.
-	3. I also changed the batch size value to see how it affect the network performance. I also had out of memory issues on AWS machine couple of times and thus had to reduce the number of filters I added in the convolution layers and also had to change the batch size. Smaller batch size and less parameters were memory friendly :)
-	4. I already added RELU and dropout to avoid overfitting and for regularization. I played around with the dropout probability and observed its effect on the overall accuracy.
-* Which parameters were tuned? How were they adjusted and why?
-	* As decribed in the answer above, I changed all the hypermeter values to see how it affects the overall accuracy of the network. Many time, it lead to even loss in accuracy.
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+	3. I also changed the batch size value to see how it affect the network performance. 
+	I also had out of memory issues on AWS machine couple of times and thus had to reduce the number of filters 
+	I added in the convolution layers and also had to change the batch size. Smaller batch size and 
+	less parameters were memory friendly :)
+	4. I already added RELU and dropout to avoid overfitting and for regularization. 
+	I played around with the dropout probability and observed its effect on the overall accuracy.
+#### 4. Which parameters were tuned? How were they adjusted and why?
+	* As decribed in the answer above, I changed all the hypermeter values to see how it affects 
+	the overall accuracy of the network. Many time, it lead to even loss in accuracy.
+#### 5. What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 	* Adding an additional convolution layer helped in the overall accuracy.
 	* Introducing the beta variable to control the cross entropy loss proved helpful.
 	* Small batch size was helpful in avoiding out of memory errors on the AWS machine.
 	* Dropout layer prevents overfitting by reducing the complexity of the network.
 	* The neurons are shooted down as per the selection of the probability value in the dropout layer.
 
-* If a well known architecture was chosen: What architecture was chosen?
-	* I played around with the various network tried on mnsit dataset. The state of the art technique is to use 2 to 3 conv layers with max pooling, dropout and relu. It has been tested by many people and the accuracy in all forms in quite excellent. So, I tried the same here.
-* Why did you believe it would be relevant to the traffic sign application? How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
-	* The traffic signs images are good for a basic network like mine. The color information isnt trivial thus grayscale images work well. The orientation might be an issue at times, but since I have trained the network using the augmented data, this might not be an issue. The sign images arent so big and the features are not too big or too small, i.e. the features on human faces like eye, lips corners etc requires small conv filters to read this detailed information from the face, but here 3x3 filter worked quite well.
+#### 6. If a well known architecture was chosen: What architecture was chosen?
+	* I played around with the various network tried on mnsit dataset. 
+	The state of the art technique is to use 2 to 3 conv layers with max pooling, dropout and relu. 
+	It has been tested by many people and the accuracy in all forms in quite excellent. So, I tried the same here.
+#### 7. Why did you believe it would be relevant to the traffic sign application? How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+	* The traffic signs images are good for a basic network like mine. 
+	The color information isnt trivial thus grayscale images work well. 
+	The orientation might be an issue at times, but since I have trained the network using the augmented data, 
+	this might not be an issue. 
+	The sign images arent so big and the features are not too big or too small, i.e. the features on human faces like eye, 
+	lips corners etc requires small conv filters to read this detailed information from the face, 
+	but here 3x3 filter worked quite well.
  
 
 ### Test a Model on New Images
