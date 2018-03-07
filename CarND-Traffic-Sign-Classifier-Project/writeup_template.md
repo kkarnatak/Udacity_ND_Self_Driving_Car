@@ -50,7 +50,7 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code](https://github.com/kkarnatak/Udacity_ND_Self_Driving_Car/blob/master/CarND-Traffic-Sign-Classifier-Project/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
@@ -85,6 +85,7 @@ Here is an example of a traffic sign image before and after grayscaling.
 As a last step, I normalized the image data because it helps to scale/shrink the image dataset at the same level. The normalization helps later in the optimization process. The optimizer (SGD, adam etc) will jump around less and will reach global minimum sooner if the data is normalized.
 
 Apart from simple normalization, mean zero, pca etc can be used to have more stable dataset. However, I havent used it here.
+It would be nice to Keras framework and its inbuilt DataAugementation api which flips, rotates and scales the image dataset.
 
 I decided to generate additional data because it will give my network more features which it can learn. For eg. changing the orientation of the image, scale up or down, all these steps helps the network to be less biased and have more feature information.
 
@@ -109,17 +110,17 @@ My final model consisted of the following layers:
 - | Layer         		|     Description	        					| 
 - |:---------------------:|:---------------------------------------------:|
 - | Input         		| 32x32x1 Grayscale image   					| 
-- | Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x32 	|
+- | Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x16 	|
 - | RELU					|												|
-- | Max pooling	      	| 2x2 stride,  outputs 16x16x32 				|
-- | Convolution 3x3	    | 1x1 stride, same padding, outputs 16x16x64 	|
-- | RELU					|												|       | Max pooling	      	| 2x2 stride,  outputs 8x8x64 				    |	
-- | Convolution 3x3	    | 1x1 stride, same padding, outputs 8x8x32 	|       
+- | Max pooling	      	| 2x2 stride,  outputs 16x16x16 				|
+- | Convolution 3x3	    | 1x1 stride, same padding, outputs 16x16x32 	|
+- | RELU					|												|       | Max pooling	      	| 2x2 stride,  outputs 8x8x32 				    |	
+- | Convolution 3x3	    | 1x1 stride, same padding, outputs 8x8x16 	|       
 - | RELU					|												| 
-- | Max pooling	      	| 2x2 stride,  outputs 4x4x32 				    |		
-- | Fully connected		| 1024       									|
-- | Fully connected		| 1024       									|
-- | Fully connected		| 1024       									|
+- | Max pooling	      	| 2x2 stride,  outputs 4x4x16 				    |		
+- | Fully connected		| 128       									|
+- | Fully connected		| 128       									|
+- | Fully connected		| 128       									|
 - | Softmax				| 43        									|
 
  
@@ -131,7 +132,7 @@ I trained the network using different values for each hyperparameters.
 The list of hyperparameters is as below:
 
 - epochs: I started with 10 epochs, but trained my final network using 100.
-- batch_size: I used 100 and 128 value for this. 128 seemed to give better result.
+- batch_size: I used 128 value for this. Although, I used small values like 32 and 64 as well when I added more layers in the network and the total number of parameters was too high and was leading to out of memory issues.
 - learning_rate: Initially, I tried the default learning rate of Adam optimizer. However, later, I used 0.003 along with exponential decay. Ideally, Adam doesnt need this, however, I tried it for fun and it made very slight improvement so I decided to keep it.
 - exponential decay: 0.9999
 - beta: I used it to tune the cross entropy cross. It helps to control by how much amount you want to push the large weights.
@@ -196,7 +197,7 @@ The images with header *.ppm are the image name and the right to it is predicted
 The result of the prediction are shown above. ( The picture displays the test image on the left and predicted one on the right.
 
 - | Image			        	|     Prediction	        					| 
-- |:---------------------		:|:---------------------------------------------:| 
+
 - | Vehicles over 3.5 metric tons prohibited| Vehicles over 3.5 metric tons prohibited
 - | Speed limit (30km/h) | Speed limit (30km/h)
 										|
