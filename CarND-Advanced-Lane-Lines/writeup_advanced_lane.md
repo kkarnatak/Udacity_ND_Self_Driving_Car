@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./images/img01.png "Undistorted"
+[image1]: ./images/img01.PNG "Undistorted"
 [image2]: ./images/img02.png "Corner01"
 [image3]: ./images/img03.png "Corner02"
 [image4]: ./images/img04.png "Corner03"
