@@ -50,7 +50,7 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code](https://github.com/kkarnatak/Udacity_ND_Self_Driving_Car/blob/master/CarND-Traffic-Sign-Classifier-Project/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
@@ -85,6 +85,7 @@ Here is an example of a traffic sign image before and after grayscaling.
 As a last step, I normalized the image data because it helps to scale/shrink the image dataset at the same level. The normalization helps later in the optimization process. The optimizer (SGD, adam etc) will jump around less and will reach global minimum sooner if the data is normalized.
 
 Apart from simple normalization, mean zero, pca etc can be used to have more stable dataset. However, I havent used it here.
+It would be nice to Keras framework and its inbuilt DataAugementation api which flips, rotates and scales the image dataset.
 
 I decided to generate additional data because it will give my network more features which it can learn. For eg. changing the orientation of the image, scale up or down, all these steps helps the network to be less biased and have more feature information.
 
@@ -109,17 +110,17 @@ My final model consisted of the following layers:
 - | Layer         		|     Description	        					| 
 - |:---------------------:|:---------------------------------------------:|
 - | Input         		| 32x32x1 Grayscale image   					| 
-- | Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x32 	|
+- | Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x16 	|
 - | RELU					|												|
-- | Max pooling	      	| 2x2 stride,  outputs 16x16x32 				|
-- | Convolution 3x3	    | 1x1 stride, same padding, outputs 16x16x64 	|
-- | RELU					|												|       | Max pooling	      	| 2x2 stride,  outputs 8x8x64 				    |	
-- | Convolution 3x3	    | 1x1 stride, same padding, outputs 8x8x32 	|       
+- | Max pooling	      	| 2x2 stride,  outputs 16x16x16 				|
+- | Convolution 3x3	    | 1x1 stride, same padding, outputs 16x16x32 	|
+- | RELU					|												|       | Max pooling	      	| 2x2 stride,  outputs 8x8x32 				    |	
+- | Convolution 3x3	    | 1x1 stride, same padding, outputs 8x8x16 	|       
 - | RELU					|												| 
-- | Max pooling	      	| 2x2 stride,  outputs 4x4x32 				    |		
-- | Fully connected		| 1024       									|
-- | Fully connected		| 1024       									|
-- | Fully connected		| 1024       									|
+- | Max pooling	      	| 2x2 stride,  outputs 4x4x16 				    |		
+- | Fully connected		| 128       									|
+- | Fully connected		| 128       									|
+- | Fully connected		| 128       									|
 - | Softmax				| 43        									|
 
  
@@ -131,7 +132,7 @@ I trained the network using different values for each hyperparameters.
 The list of hyperparameters is as below:
 
 - epochs: I started with 10 epochs, but trained my final network using 100.
-- batch_size: I used 100 and 128 value for this. 128 seemed to give better result.
+- batch_size: I used 128 value for this. Although, I used small values like 32 and 64 as well when I added more layers in the network and the total number of parameters was too high and was leading to out of memory issues.
 - learning_rate: Initially, I tried the default learning rate of Adam optimizer. However, later, I used 0.003 along with exponential decay. Ideally, Adam doesnt need this, however, I tried it for fun and it made very slight improvement so I decided to keep it.
 - exponential decay: 0.9999
 - beta: I used it to tune the cross entropy cross. It helps to control by how much amount you want to push the large weights.
@@ -148,31 +149,50 @@ My final model results were:
 ![alt text][15]
 If an iterative approach was chosen:
 
-1. What was the first architecture that was tried and why was it chosen?
-	1. I choose it after applying things in brute force way. I added and deleted layers multiple times and observed the change in accuracy. I used read about existing high performing network structure on similar kinda image dataset and tried to use similar structure.
-	2. I initially tried with 2 convolution layer and with dropout of 0.75. I realised that I am shooting lot of useful neurons and then changed the dropout value to 0.25. I also added addition convolution layer.
-	3. I was using a filter size of 5x5 in all the convolution layers, however, I realised may be the size if big for the image dataset we have. Thus, switched to 3x3 filter size.
-1. What were some problems with the initial architecture?
+#### 1. What was the first architecture that was tried and why was it chosen?
+	1. I choose it after applying things in brute force way. I added and deleted layers multiple times 
+	and observed the change in accuracy. I used read about existing high performing network structure 
+	on similar kinda image dataset and tried to use similar structure.
+	2. I initially tried with 2 convolution layer and with dropout of 0.75. I realised that I am shooting 
+	lot of useful neurons and then changed the dropout value to 0.25. 
+	I also added addition convolution layer.
+	3. I was using a filter size of 5x5 in all the convolution layers, however, 
+	I realised may be the size if big for the image dataset we have. Thus, switched to 3x3 filter size.
+#### 2. What were some problems with the initial architecture?
 	1. The filter size was quite big thus small features like corners in the sign image were getting missed.
-	2. The layers were not enough to have enough parameters to accomodate all the features. I also increased the number of filters in a layer which gave in better accuracy results.
-1. How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+	2. The layers were not enough to have enough parameters to accomodate all the features. 
+	I also increased the number of filters in a layer which gave in better accuracy results.
+#### 3. How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
 	1. As described above, I added/removed layers multiple times.
 	2. I adjusted the learning rate and exponential decay parameters for the Optimizer.
-	3. I also changed the batch size value to see how it affect the network performance. I also had out of memory issues on AWS machine couple of times and thus had to reduce the number of filters I added in the convolution layers and also had to change the batch size. Smaller batch size and less parameters were memory friendly :)
-	4. I already added RELU and dropout to avoid overfitting and for regularization. I played around with the dropout probability and observed its effect on the overall accuracy.
-* Which parameters were tuned? How were they adjusted and why?
-	* As decribed in the answer above, I changed all the hypermeter values to see how it affects the overall accuracy of the network. Many time, it lead to even loss in accuracy.
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+	3. I also changed the batch size value to see how it affect the network performance. 
+	I also had out of memory issues on AWS machine couple of times and thus had to reduce the number of filters 
+	I added in the convolution layers and also had to change the batch size. Smaller batch size and 
+	less parameters were memory friendly :)
+	4. I already added RELU and dropout to avoid overfitting and for regularization. 
+	I played around with the dropout probability and observed its effect on the overall accuracy.
+#### 4. Which parameters were tuned? How were they adjusted and why?
+	* As decribed in the answer above, I changed all the hypermeter values to see how it affects 
+	the overall accuracy of the network. Many time, it lead to even loss in accuracy.
+#### 5. What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 	* Adding an additional convolution layer helped in the overall accuracy.
 	* Introducing the beta variable to control the cross entropy loss proved helpful.
 	* Small batch size was helpful in avoiding out of memory errors on the AWS machine.
 	* Dropout layer prevents overfitting by reducing the complexity of the network.
 	* The neurons are shooted down as per the selection of the probability value in the dropout layer.
 
-* If a well known architecture was chosen: What architecture was chosen?
-	* I played around with the various network tried on mnsit dataset. The state of the art technique is to use 2 to 3 conv layers with max pooling, dropout and relu. It has been tested by many people and the accuracy in all forms in quite excellent. So, I tried the same here.
-* Why did you believe it would be relevant to the traffic sign application? How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
-	* The traffic signs images are good for a basic network like mine. The color information isnt trivial thus grayscale images work well. The orientation might be an issue at times, but since I have trained the network using the augmented data, this might not be an issue. The sign images arent so big and the features are not too big or too small, i.e. the features on human faces like eye, lips corners etc requires small conv filters to read this detailed information from the face, but here 3x3 filter worked quite well.
+#### 6. If a well known architecture was chosen: What architecture was chosen?
+	* I played around with the various network tried on mnsit dataset. 
+	The state of the art technique is to use 2 to 3 conv layers with max pooling, dropout and relu. 
+	It has been tested by many people and the accuracy in all forms in quite excellent. So, I tried the same here.
+#### 7. Why did you believe it would be relevant to the traffic sign application? How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+	* The traffic signs images are good for a basic network like mine. 
+	The color information isnt trivial thus grayscale images work well. 
+	The orientation might be an issue at times, but since I have trained the network using the augmented data, 
+	this might not be an issue. 
+	The sign images arent so big and the features are not too big or too small, i.e. the features on human faces like eye, 
+	lips corners etc requires small conv filters to read this detailed information from the face, 
+	but here 3x3 filter worked quite well.
  
 
 ### Test a Model on New Images
@@ -181,22 +201,23 @@ If an iterative approach was chosen:
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][05] ![alt text][06] ![alt text][07] 
-![alt text][08] ![alt text][09]
-
 I downloaded the german traffic image dataset from the official website:
 http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset#Structure
 
-Since the images were in *.ppm format I am attaching the images generated from my assignment notebook.
+Please note, Since the images were in *.ppm format I am attaching the images generated from my assignment notebook.
+The images with header *.ppm are the image name and the right to it is predicted image ( with class id (i.e. 16  or 1 ) as its header ).
+
+![alt text][05] ![alt text][06] ![alt text][07] 
+![alt text][08] ![alt text][09]
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 The result of the prediction are shown above. ( The picture displays the test image on the left and predicted one on the right.
 
 - | Image			        	|     Prediction	        					| 
-- |:---------------------		:|:---------------------------------------------:| 
+
 - | Vehicles over 3.5 metric tons prohibited| Vehicles over 3.5 metric tons prohibited
--  									| 
 - | Speed limit (30km/h) | Speed limit (30km/h)
 										|
 - | Keep right| Keep right
@@ -211,9 +232,9 @@ The model was able to correctly guess 5 of the 5 traffic signs, which gives an a
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-* The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+Please note: Instead of writing the values for the test images( image from web) I am attaching the images generated in the python notebook.
 
-1. The confidence level of the predictions is quite good. The prediction probability for the correct class label are higher than 0.98 in all the cases. Instead of writing the values for the test images( image from web) I am attaching the images generated in the python notebook.
+1. The confidence level of the predictions is quite good. The prediction probability for the correct class label are higher than 0.98 in all the cases. 
 
 1. I wanted to try batch normalization and also have added some code which I found at https://gist.github.com/tomokishii/0ce3bdac1588b5cca9fa5fbdf6e1c412, however, I didnt have time to incorporate it.
  
