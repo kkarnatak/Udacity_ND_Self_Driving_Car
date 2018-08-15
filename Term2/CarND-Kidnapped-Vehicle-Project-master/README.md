@@ -65,7 +65,7 @@ When you run the project you see the following:
 ```
 The application is connected to the simulator. The simulator window looks as below:
 
-![Simulator window](images/img01.png)
+![Simulator window](images/img01.PNG)
 
 
 Here is the main protocol that main.cpp uses for uWebSocketIO in communicating with the simulator.
