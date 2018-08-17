@@ -5,8 +5,8 @@ Self-Driving Car Engineer Nanodegree Program
 ![Output](./images/output.png)
 
 ### Output videos
-| Full PID controlled car        | Only Steer PID | Only P           | Only I        | Only D           |
-| ------------- |:-------------:| :-------------:|:-------------:| :-------------:| :-------------:|
+| Full PID controlled car | Only Steer PID | Only P           | Only I        | Only D           |
+| ------------- |:-------------:| :-------------:|:-------------:| :-------------:|
 | ![Full PID](./images/full_pid.gif)|![Only Steer PID](./images/only_steer.gif) | ![Only P](./images/only_p.gif)|![Only I](./images/only_i.gif)|![Only D](./images/only_d.gif)|
 
 ---
