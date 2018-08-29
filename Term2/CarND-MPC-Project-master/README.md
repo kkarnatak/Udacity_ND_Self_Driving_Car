@@ -1,7 +1,7 @@
 # CarND-Controls-MPC
 Self-Driving Car Engineer Nanodegree Program
 
-The project was not so difficult as most of the things were provided in the lectures quizzes. It was mostly about playing with the hyperparameters.
+The project was not so difficult as most of the things were provided in the lecture quizzes. It was mostly about playing with the hyperparameters.
 However, I have to admit the hardest part was the environment setup :D. It took me 2 days to configure it, and even now the working setup is quite modified. I am running the simulator on windows and running the code on Ubuntu ( via virtualbox ). Please find my concerns about code compilation in the section [Compilation and Environment Issues](#Compilation-and-Environment-Issues)
 
 ---
