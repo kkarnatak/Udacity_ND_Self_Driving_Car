@@ -6,6 +6,13 @@ However, I have to admit the hardest part was the environment setup :D. It took 
 
 ---
 
+## Final Output
+
+The model after implementation and tuning the hyperparameters gives the following output:
+
+![Final](./images/final.gif)
+[Link to video](./videos/final.mp4)
+
 ## The Model
 
 The model has the following parameters:
@@ -95,7 +102,7 @@ The timestep frquency also has similar restrictions. The impact of these two par
 
 The values of N and dt played significant role in trajectory calculation.
 
-| N = 15, dt = 0.1 | N = 10, dt = 0.1 | N = 8, dt = 0.15 <b>racer :)</b> | N = 8, dt = 0.1 <b>Final</b>          |
+| N = 15, dt = 0.1 | N = 10, dt = 0.1 | N = 8, dt = 0.15 <b>racer :)</b> | N = 8, dt = 0.1 <b><u>Final</u></b>          |
 | ------------- |:-------------:| :-------------:| :-------------:|
 | ![Higher](./images/N15.gif)|![Lower](./images/N10.gif) | ![Racer](./images/N8.gif) | ![Final](./images/final.gif)|
 | [Link to video](./videos/N15.mp4) | [Link to video](./videos/N10.mp4)|[Link to video](./videos/N8.mp4)| [Link to video](./videos/final.mp4)|
