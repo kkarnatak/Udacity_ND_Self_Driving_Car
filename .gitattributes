@@ -1,4 +1,5 @@
 # Auto detect text files and perform LF normalization
 #* text=python
 
-docs/* linguist-documentation
+* linguist-vendored
+*.cpp linguist-vendored=false
