@@ -2,4 +2,4 @@
 #* text=python
 
 * linguist-vendored
-*.cpp linguist-vendored=false
+*.cpp *.py linguist-vendored=false
