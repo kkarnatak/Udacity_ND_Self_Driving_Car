@@ -4,4 +4,5 @@
 #* linguist-vendored
 #*.cpp *.py linguist-vendored=false
 
-Term2/CarND-MPC-Project-master/src/main.cpp linguist-detectable=false
+Term2/CarND-MPC-Project-master/src/main.cpp linguist-detectable=true
+Term1/CarND-Behavioral-Cloning-P3/drive.py linguist-detectable=true
