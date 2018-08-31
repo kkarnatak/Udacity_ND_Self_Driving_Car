@@ -1,5 +1,7 @@
 # Auto detect text files and perform LF normalization
 #* text=python
 
-* linguist-vendored
-*.cpp *.py linguist-vendored=false
+#* linguist-vendored
+#*.cpp *.py linguist-vendored=false
+
+Term2/CarND-MPC-Project-master/src/main.cpp linguist-detectable=false
