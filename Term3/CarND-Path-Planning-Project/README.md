@@ -31,7 +31,7 @@ The code structure is as below:
 
 **Finite State Machine**
 
-![FSM](images/fsm.PNG)
+![FSM](images/fsm.png)
 
 * As seen in the picture above. The FSM can suggest either Lane Keep state or prepare to do lane change, either to left or right ( depends on the information received from the sensor fusion ).
 
@@ -74,7 +74,7 @@ The highway's waypoints loop around so the frenet s value, distance along the ro
 
 **Successful cmake and make**
 
-![compile](images/compile.png)
+![compile](images/compile.PNG)
 
 Here is the data provided from the Simulator to the C++ Program
 
