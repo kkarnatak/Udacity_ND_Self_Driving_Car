@@ -11,6 +11,8 @@ Self-Driving Car Engineer Nanodegree Program
 
 ![Video](images/video.gif)
 
+Full video can be found at [Video](./video/video.mp4)
+
 **Code Structure**
 
 The code structure is as below:
