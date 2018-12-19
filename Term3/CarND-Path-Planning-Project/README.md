@@ -49,7 +49,7 @@ The code structure is as below:
 * After the spline are created, we have to recompute the current map points using the generated curve.
 * To recompute we use equidistant points that will keep our desired speed. It should look like below:
   
-  ![equisitant](images/equidistant.PNG)
+  ![equisitant](images/equidistant.png)
 * Now we compute the coordinates using the spline
 * After we have the coordinates, we shift the orientation back.
 
