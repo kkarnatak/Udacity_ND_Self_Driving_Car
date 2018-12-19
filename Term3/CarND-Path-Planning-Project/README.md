@@ -65,7 +65,7 @@ The highway's waypoints loop around so the frenet s value, distance along the ro
 
 **Successful cmake and make**
 
-![compile](images/compile.png)
+![compile](images/compile.PNG)
 
 Here is the data provided from the Simulator to the C++ Program
 
