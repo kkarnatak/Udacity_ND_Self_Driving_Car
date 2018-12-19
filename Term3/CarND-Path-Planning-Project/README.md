@@ -41,8 +41,17 @@ The code structure is as below:
 * Once Prepare Lane Change is set, the state transits to Lane Change. The ego car will do the lane change here.
 * After lane change, the ego car will return to keep lane state.
 
-**Path Generation**
-The path generation is done by generating splines using the spline.h header. Splines are piecewise polymetric curve. The path planner used here is a spline mathematical function used for curve fitting the map coordinates. The splines are useful as they generate quite smooth curves which create nice smoothened acceleration and jerk profiles. This is done at [line 432](./src/main.cpp#L432)
+**Trajectory Generation**
+
+* The path generation is done by generating splines using the spline.h header.
+* Splines are piecewise polymetric curve. The path planner used here is a spline mathematical function used for curve fitting the map coordinates.
+* The splines are useful as they generate quite smooth curves which create nice smoothened acceleration and jerk profiles. This is done at [line 432](./src/main.cpp#L432)
+* After the spline are created, we have to recompute the current map points using the generated curve.
+* To recompute we use equidistant points that will keep our desired speed. It should look like below:
+  
+  ![equisitant](images/equidistant.PNG)
+* Now we compute the coordinates using the spline
+* After we have the coordinates, we shift the orientation back.
 
    
 ### Simulator.
